@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Products index</h1>
+    <section class="row">
+        <section class="col-2">
+            <h2>side bar</h2>
+        </section>
+        <section class="row col-10 m-0 p-0">
+            {% for product in products %}
+                <div class="card col-2 m-2 p-0" style="width:15px;">
+                    <img src="{{ asset(product.image) }}" alt="Symfony!"/>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.Name }}</h5>
+                        <p class="card-text">${{ product.Price }} </p>
+                    </div>
+                    <div class="card-footer m-0 p-0">
+                        <a href="{{ path('app_products_show', {'id': product.id}) }}">show</a>
+                        <a href="{{ path('app_products_edit', {'id': product.id}) }}">edit</a>
+                    </div>
+                </div>
+            {% else %}
+                <p>no records found</p>
+            {% endfor %}
+        </section>
+    </section>
+    <a href="{{ path('app_products_new') }}">Create new</a>
+{% endblock %}
