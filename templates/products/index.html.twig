@@ -1,29 +1,51 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Products index</h1>
-    <section class="row">
-        <section class="col-2">
-            <h2>side bar</h2>
+    <section style="background: lavenderblush" class="row mt-2">
+        <section class="col-4">
+                <div class="container">
+                    <form action={{ path('app_products_index') }} method="get">
+
+                        <input type="string" name="Name" class="form-control rounded mb-4 mt-4"
+                               placeholder="What are you looking for?" aria-label="Search"
+                               aria-describedby="search-addon"/>
+                        Min Price: <input type="number" class="mb-2" name="minPrice"><br>
+                        Max Price: <input type="number" class="mb-4" name="maxPrice"><br>
+                        <input type="submit" value="Search" class="btn btn-primary"> |
+                        <a href="{{ path('app_products_index') }}"
+                           class="btn btn-primary">Reset</a>
+                        <div class="row mt-4" style="display: flex">
+                            <div style="color: red" class="col-1"><p>Price: </p></div>
+                            <div class="col-3 pr-1">
+                                <a href="{{ path(app.request.attributes.get('_route'),
+                                    app.request.query.all|merge({'sort': 'price', 'order': 'desc'})) }}"
+                                   class="btn btn-primary btn-sm">High -> Low</a>
+                                <a style="background: #5eb5e0" href="{{ path(app.request.attributes.get('_route'),
+                                    app.request.query.all|merge({'sort': 'price', 'order': 'asc'})) }}"
+                                   class="btn btn-primary btn-sm">Low -> High</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
         </section>
-        <section class="row col-10 m-0 p-0">
+        <section class="row col-8 m-0 p-0 mt-4">
             {% for product in products %}
-                <div class="card col-2 m-2 p-0" style="width:15px;">
-                    <img src="{{ asset(product.image) }}" alt="Symfony!"/>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.Name }}</h5>
-                        <p class="card-text">${{ product.Price }} </p>
-                    </div>
-                    <div class="card-footer m-0 p-0">
-                        <a href="{{ path('app_products_show', {'id': product.id}) }}">show</a>
-                        <a href="{{ path('app_products_edit', {'id': product.id}) }}">edit</a>
+                <div class="col-3 mb-2">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="{{ asset(product.image) }}" alt="Symfony!"/>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p>Price: ${{ product.price }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ path('app_products_show', {'id': product.id}) }}"
+                               class="btn btn-primary btn-sm">Show</a>
+                        </div>
                     </div>
                 </div>
-            {% else %}
-                <p>no records found</p>
             {% endfor %}
         </section>
     </section>
-    <a href="{{ path('app_products_new') }}">Create new</a>
+{#    <a href="{{ path('app_products_new') }}">Create new</a>#}
 {% endblock %}
 

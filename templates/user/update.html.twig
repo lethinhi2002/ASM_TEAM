@@ -37,6 +37,7 @@
                 </div>
                 <div class="form-group">
                     <button class="btn btn-info mt-2 text-white">Update</button>
+                    <a class="btn btn-danger" href="{{ path('delete',{'id': data.id }) }}">Delete</a>
                 </div>
                 {{ form_end(form) }}
             </div>

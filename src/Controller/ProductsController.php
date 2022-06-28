@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Products;
 use App\Form\ProductsType;
 use App\Repository\ProductsRepository;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +18,42 @@ class ProductsController extends AbstractController
 {
     /**
      * @Route("/", name="app_products_index", methods={"GET"})
+     * @param ProductsRepository $productsRepository
+     * @param Request $request
+     * @param $orderBy
+     * @return Response
      */
-    public function index(ProductsRepository $productsRepository): Response
+    public function index(ProductsRepository $productsRepository, Request $request): Response
     {
-        return $this->render('products/index.html.twig', [
-            'products' => $productsRepository->findAll(),
+        $minPrice = $request->query->get('minPrice');
+        $maxPrice = $request->query->get('maxPrice');
+        $Name = $request->query->get('Name');
+        $sortBy = $request->query->get('sort');
+        $orderBy = $request->query->get('order');
+
+
+        $expressionBuilder = Criteria::expr();
+        $criteria = new Criteria();
+        if (!is_null($minPrice) || empty($minPrice)) {
+            $minPrice = 0;
+        }
+        $criteria->where($expressionBuilder->gte('price', $minPrice));
+
+        if (!is_null($maxPrice) && !empty(($maxPrice))) {
+            $criteria->andWhere($expressionBuilder->lte('price', $maxPrice));
+
+        }
+        if (!is_null($Name) && !empty(($Name))) {
+            $criteria->andWhere($expressionBuilder->contains('name', $Name));
+            $criteria->orWhere($expressionBuilder->contains('category', $Name));
+        }
+        if(!empty($sortBy)){
+            $criteria->orderBy([$sortBy => ($orderBy == 'asc') ? Criteria::ASC : Criteria::DESC]);
+        }
+
+        $filteredList = $productsRepository->matching($criteria);
+        return $this->renderForm('products/index.html.twig', [
+            'products' => $filteredList,
         ]);
     }
 

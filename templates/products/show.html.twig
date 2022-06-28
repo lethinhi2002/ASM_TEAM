@@ -3,40 +3,47 @@
 {% block title %}Products{% endblock %}
 
 {% block body %}
-    <h1>Products</h1>
+    <h1 style="color: #5eb5e0; size: 5px; text-align: center;"><u>PRODUCT INFORMATION</u>
+    </h1>
+    <div style="background: cornsilk" class="row">
+        <div class="col-5">
+            <img style="width: 550px" src="{{ asset(product.image) }}" alt="Symfony!"/>
+        </div>
+        <div class="col-7">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ product.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ product.name }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ product.price }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ product.content }}</td>
-            </tr>
-            <tr>
-                <th>Category</th>
-                <td>{{ product.category }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ product.image }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_products_index') }}">back to list</a>
+            <table class="table">
+                <tbody>
 
-    <a href="{{ path('app_products_edit', {'id': product.id}) }}">edit</a>
+                <tr>
+                    <th style="color: #B0413E; padding-left: 2px">Name</th>
+                    <td>{{ product.name }}</td>
+                </tr>
+                <tr>
+                    <th style="color: #B0413E; padding-left: 2px">Price</th>
+                    <td>{{ product.price }}</td>
+                </tr>
+                <tr>
+                    <th style="color: #B0413E; padding-left: 2px">Content</th>
+                    <td>{{ product.content }}</td>
+                </tr>
 
-    {{ include('products/_delete_form.html.twig') }}
+
+                </tbody>
+            </table>
+            <div class="button_group">
+                <button style="color: red; background-color: #5eb5e0; border-radius: 5px;" class="button add-cart" type="button">Add To Cart</button>
+                <button style="color: red;border-radius: 5px;" class="button compare" type="button"><i class="fa fa-exchange"></i></button>
+                <button style="color: red;border-radius: 5px" class="button wishlist" type="button"><i class="fa fa-heart-o"></i></button>
+            </div>
+
+        </div>
+
+    </div>
+
+    {#    <a href="{{ path('app_products_index') }}" style="padding-left: 350px">back to list</a> #}
+
+    {#    <a href="{{ path('app_products_edit', {'id': product.id}) }}" style="padding-left: 100px">edit</a> #}
+
+    {#    {{ include('products/_delete_form.html.twig') }} #}
 {% endblock %}
