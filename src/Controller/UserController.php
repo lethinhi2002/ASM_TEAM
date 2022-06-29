@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/", name="user",)
+     * @Route("/", name="index",)
      */
     public function index(): Response
     {
@@ -26,7 +26,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/create", name="create")
+     * @Route("/create", name="app_user_create")
      */
     public function create(Request $request){
         $user = new User();
