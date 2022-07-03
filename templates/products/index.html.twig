@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig.' %}
 
 {% block body %}
     <section style="background: lavenderblush" class="row mt-2">
@@ -27,8 +27,12 @@
                         </div>
                     </form>
                 </div>
+            <div style="padding-top: 50px;padding-left: 12px;"><button style="border-radius:5px "><a href="{{ path('app_products_new') }}">Create new product</a></button> </div>
+
         </section>
+
         <section class="row col-8 m-0 p-0 mt-4">
+
             {% for product in products %}
                 <div class="col-3 mb-2">
                     <div class="card h-100">
@@ -46,6 +50,6 @@
             {% endfor %}
         </section>
     </section>
-{#    <a href="{{ path('app_products_new') }}">Create new</a>#}
+{#    <button><a href="{{ path('app_products_new') }}">Create new product</a></button>#}
 {% endblock %}
 

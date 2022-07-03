@@ -3,11 +3,24 @@
 {% block title %}Edit Products{% endblock %}
 
 {% block body %}
+<div class="container mt-3">
+    <table class="table table-bordered">
+
+
     <h1>Edit Products</h1>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
 
-    {{ include('products/_form.html.twig', {'button_label': 'Update'}) }}
+   <td> {{ include('products/_form.html.twig', {'button_label': 'Update'}) }}</td>
+            </tr>
+            </thead>
+        </table>
+        {{ include('products/_delete_form.html.twig') }}
+</div>
 
-    <a href="{{ path('app_products_index') }}">back to list</a>
+    <a href="{{ path('app_products_index') }}" style="color: red; padding-left: 120px">back to list</a>
 
-    {{ include('products/_delete_form.html.twig') }}
+
+
 {% endblock %}

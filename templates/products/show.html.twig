@@ -32,7 +32,23 @@
                 </tbody>
             </table>
             <div class="button_group">
-                <button style="color: red; background-color: #5eb5e0; border-radius: 5px;" class="button add-cart" type="button">Add To Cart</button>
+                <button style="color: red; background-color: #5eb5e0; border-radius: 5px;" class="button add-cart"
+                        type="button">Add To Cart
+                </button>
+                </button>
+                <button class="button compare" type="button"><i style="color: red" class="fa fa-exchange"></i></button>
+                <button class="button wishlist" type="button"><i style="color: red" class="fa fa-heart-o"></i></button>
+
+                <div style="color: red; padding-top: 20px;"> {{ include('products/_delete_form.html.twig') }}</div>
+                <div style="padding-top: 20px">
+
+                    <button style="border-radius: 5px;"><a href="{{ path('app_products_edit', {'id': product.id}) }}"class='btn btn-default'>edit</a>
+                    </button>
+                </div>
+                <div style="padding-top: 20px">
+                    <button style="border-radius: 5px"><a href="{{ path('app_products_index') }}"class='btn btn-default'>back to list</a>
+                    </button>
+                </div>
 
             </div>
 
@@ -44,5 +60,9 @@
 
     {#    <a href="{{ path('app_products_edit', {'id': product.id}) }}" style="padding-left: 100px">edit</a> #}
 
-    {#    {{ include('products/_delete_form.html.twig') }} #}
+    {#    <a href="{{ path('app_products_new')}}" >creat product</a> #}
+    {#      <div style="color: red; padding-left: 50px"> {{ include('products/_delete_form.html.twig') }}</div> #}
+
 {% endblock %}
+{# style="padding-left: 350px" #}
+

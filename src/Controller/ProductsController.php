@@ -34,6 +34,7 @@ class ProductsController extends AbstractController
 
         $expressionBuilder = Criteria::expr();
         $criteria = new Criteria();
+
         if (!is_null($minPrice) || empty($minPrice)) {
             $minPrice = 0;
         }
